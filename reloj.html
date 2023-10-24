@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reloj Analogo Digital</title>
+    <style>
+        .reloj {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: url('https://www.educ.ar/uploads/ckeditor/pictures/122/content_manual-0122-practice-4-complete.png') no-repeat;
+            background-size: 100% 100%;
+        }
+        .hora {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+        }
+        .minuto {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+        }
+        .segundo {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="reloj">
+        <div class="hora"></div>
+        <div class="minuto"></div>
+        <div class="segundo"></div>
+    </div>
+    <h1 id="hora-digital"></h1>
+    <script>
+        function actualizarReloj() {
+            var ahora = new Date();
+            var hora = ahora.getHours();
+            var minuto = ahora.getMinutes();
+            var segundo = ahora.getSeconds();
+
+            var gradosHora = ((hora % 12) / 12) * 360 + (minuto / 60) * 30;
+            var gradosMinuto = (minuto / 60) * 360 + (segundo / 60) * 6;
+            var gradosSegundo = (segundo / 60) * 360;
+
+            document.querySelector('.hora').style.transform = 'rotate(' + gradosHora + 'deg)';
+            document.querySelector('.minuto').style.transform = 'rotate(' + gradosMinuto + 'deg)';
+            document.querySelector('.segundo').style.transform = 'rotate(' + gradosSegundo + 'deg)';
+
+            document.getElementById('hora-digital').textContent = ahora.toLocaleTimeString();
+        }
+
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
+</body>
+</html>
